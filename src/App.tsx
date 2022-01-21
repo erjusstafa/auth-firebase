@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
@@ -12,34 +12,40 @@ import { useReduxDispatch, useReduxSelector } from "./redux/hooks";
 import { saveUser } from "./redux/actions/authSlice";
 import ProtectedRoute from "./utils/ProtectedRoute";
 import Header from "./components/Header";
-import Data from "./Todo";
+import Quiz from "./components/Quiz";
 
 function App() {
   initializeApp(firebaseConfig);
   const auth = getAuth();
   const user = useReduxSelector((state) => state.user.value);
-  console.log("user from state", user);
+  const isauthPerson  = useReduxSelector((state) => state.user.isAuth);
+
+
+  
+
+  const [isAuth , setIsAuth] = useState<boolean>(isauthPerson)
+
   const dispatch = useReduxDispatch();
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
         dispatch(saveUser(user.refreshToken));
+        setIsAuth(true)
       } else {
         dispatch(saveUser(undefined));
+        setIsAuth(false)
       }
     });
   }, [auth, dispatch]);
 
+  console.log("isAuth", isAuth);
 
 
-/*   const signIn = () => {
-    const a = new  firebase.auth.GoogleAuthProvider()
-  } */
   return (
     <div className="App">
       <Router>
     
-      <Header  auth={auth}  signOut={signOut}/>
+      <Header  auth={auth}  signOut={signOut}  isAuth={isAuth}/>
 
         <Switch>
           <Route exact path="/register">
@@ -49,16 +55,17 @@ function App() {
           <Route exact path="/login">
             <Login />
           </Route>
+          <Route exact path="/quiz">
+            <Quiz />
+          </Route>
           <Route exact path="/reset">
             <Reset />
           </Route>
           <ProtectedRoute exact path="/protected" component={Secret} />
           <ProtectedRoute exact path="/" component={Home} />
+
         </Switch>
       </Router>
-
-
-{/*       <button onClick={signIn}>sign</button> */}
     </div>
   );
 }

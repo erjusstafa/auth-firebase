@@ -5,6 +5,8 @@ import "./style.scss";
 interface IHeader {
   auth: any;
   signOut: any;
+  isAuth: boolean
+
 }
 
 interface IWidthHeight {
@@ -12,13 +14,14 @@ interface IWidthHeight {
   height: number;
 }
 
-function Header({ signOut, auth }: IHeader) {
+function Header({ signOut, auth, isAuth }: IHeader) {
   const history = useHistory();
   const [menuOpen, setMenuOpen] = useState(false);
   const [size, setSize] = useState<IWidthHeight>({
     width: 0,
     height: 0,
   });
+
 
   useEffect(() => {
     const handleResize = () => {
@@ -54,24 +57,38 @@ function Header({ signOut, auth }: IHeader) {
   <li>
     <Link to="/" onClick={menuToggleHandler}>Home</Link>
   </li>
-  <li>
+  {
+    isAuth === true ? null : 
+    <Fragment>
+      <li>
     <Link to="/login" onClick={menuToggleHandler}>Login</Link>
   </li>
   <li>
     <Link to="/register" onClick={menuToggleHandler}> Register</Link>
   </li>
-  <li>
-    <Link to="/reset" onClick={menuToggleHandler}>Reset password</Link>
-  </li>
+    </Fragment>
+  }
+ 
   <li>
     <Link to="/protected" onClick={menuToggleHandler}>Protected page</Link>
+  </li>
+  {
+
+isAuth ?
+
+<Fragment>
+<li>
+    <Link to="/quiz" onClick={menuToggleHandler}>Quiz</Link>
+  </li>
+   <li>
+    <Link to="/reset" onClick={menuToggleHandler}>Reset password</Link>
   </li>
   <li>
     <Link
       to="#"
       onClick={() => {
         signOut(auth)
-          .then(() => {
+          .then((isAuth : boolean) => {
             console.log("user signed out");
           })
           .catch((error: any) => {
@@ -83,6 +100,15 @@ function Header({ signOut, auth }: IHeader) {
       Log out
     </Link>
   </li>
+
+<li>
+
+
+
+</li>
+</Fragment>
+: null
+}
 </ul>
 
     </Fragment>
