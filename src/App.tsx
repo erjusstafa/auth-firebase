@@ -54,7 +54,6 @@ function App() {
           </Route>
           <ProtectedRoute exact path="/protected" component={Secret} />
           <ProtectedRoute exact path="/" component={Home} />
-          <ProtectedRoute exact path="/data"  component={Data} />
         </Switch>
       </Router>
 

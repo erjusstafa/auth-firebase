@@ -50,9 +50,7 @@ function Header({ signOut, auth }: IHeader) {
     <Fragment>
       <ul>
 
-<li>
-    <Link to="/data" onClick={menuToggleHandler}>data</Link>
-  </li>
+
   <li>
     <Link to="/" onClick={menuToggleHandler}>Home</Link>
   </li>

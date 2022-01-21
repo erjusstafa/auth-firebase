@@ -89,9 +89,9 @@ export const {
 export const { select: selectTaskActionCreator } = selectedTaskSlice.actions;
 
 export  const reducerAction = {
-  tasks: tasksSlice.reducer,
-  selectedTask: selectedTaskSlice.reducer,
-  counter: counterSlice.reducer,
+  tasks: tasksSlice,
+  selectedTask: selectedTaskSlice,
+  counter: counterSlice,
 };
 
 
