@@ -12,6 +12,7 @@ import { useReduxDispatch, useReduxSelector } from "./redux/hooks";
 import { saveUser } from "./redux/actions/authSlice";
 import ProtectedRoute from "./utils/ProtectedRoute";
 import Header from "./components/Header";
+import Data from "./Todo";
 
 function App() {
   initializeApp(firebaseConfig);
@@ -44,6 +45,7 @@ function App() {
           <Route exact path="/register">
             <Register />
           </Route>
+          
           <Route exact path="/login">
             <Login />
           </Route>
@@ -52,8 +54,7 @@ function App() {
           </Route>
           <ProtectedRoute exact path="/protected" component={Secret} />
           <ProtectedRoute exact path="/" component={Home} />
-
-           
+          <ProtectedRoute exact path="/data"  component={Data} />
         </Switch>
       </Router>
 

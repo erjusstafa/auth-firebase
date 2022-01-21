@@ -9,7 +9,7 @@ export const persistConfig = {
   blacklist: ["value"],
 };
 
-const persistedReducer = persistReducer(persistConfig, rootReducer);
+const persistedReducer = persistReducer(persistConfig, rootReducer );
 
 const store = configureStore({
   reducer: persistedReducer,
