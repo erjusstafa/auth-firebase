@@ -1,116 +1,107 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import "./style.scss";
-
 interface IHeader {
   auth: any;
   signOut: any;
-  isAuth: boolean
-
-}
-
-interface IWidthHeight {
-  width: number;
-  height: number;
+  isAuth: boolean;
 }
 
 function Header({ signOut, auth, isAuth }: IHeader) {
-  const history = useHistory();
-  const [menuOpen, setMenuOpen] = useState(false);
-  const [size, setSize] = useState<IWidthHeight>({
-    width: 0,
-    height: 0,
+  const [click, setClick] = useState<boolean>(false);
+  const [navbar, setNavbar] = useState<boolean>(false);
+
+  const handleClick = () => {
+    setClick(!click);
+  };
+
+  const closeMobileMenu = () => {
+    setClick(false);
+  };
+
+  const changeBackground = () => {
+    if (window.scrollY >= 80) {
+      setNavbar(true);
+    } else {
+      setNavbar(false);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", changeBackground);
   });
 
-
-  useEffect(() => {
-    const handleResize = () => {
-      setSize({
-        width: window.innerWidth,
-        height: window.innerHeight,
-      });
-    };
-    window.addEventListener("resize", handleResize);
-
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
-  useEffect(() => {
-    if (size.width > 768 && menuOpen) {
-      setMenuOpen(false);
-    }
-  }, [size.width, menuOpen]);
-
-  const menuToggleHandler = () => {
-    setMenuOpen((p) => !p);
-  };
-
-  const ctaClickHandler = () => {
-    menuToggleHandler();
-    history.push("/page-cta");
-  };
   return (
     <Fragment>
-      <ul>
+      <div className="nav">
+        <nav className={navbar ? "navbar active" : "navbar"}>
+          <Link to="/" className="navbar_logo">
+            <p>𝕰𝖗𝖏𝖚𝖘 𝖘𝖙𝖆𝖋𝖆</p>
+          </Link>
+          <div className="menu-icon" onClick={handleClick}>
+            {click ? (
+              <i className="fas fa-times close_x"></i>
+            ) : (
+              <i className="fas fa-bars align_right" />
+            )}
+          </div>
+          <ul className={click ? "nav-menu active" : "nav-menu"}>
+            <li className="nav-item">
+              <Link to="/" className="nav-links">
+                Home
+              </Link>
+            </li>
 
+            <li className="nav-item">
+              <Link to="/quiz" className="nav-links">
+                Quiz
+              </Link>
+            </li>
 
-  <li>
-    <Link to="/" onClick={menuToggleHandler}>Home</Link>
-  </li>
-  {
-    isAuth === true ? null : 
-    <Fragment>
-      <li>
-    <Link to="/login" onClick={menuToggleHandler}>Login</Link>
-  </li>
-  <li>
-    <Link to="/register" onClick={menuToggleHandler}> Register</Link>
-  </li>
-    </Fragment>
-  }
- 
-  <li>
-    <Link to="/protected" onClick={menuToggleHandler}>Protected page</Link>
-  </li>
-  {
+            {isAuth === true ? null : (
+              <Fragment>
+                <li className="nav-item">
+                  <Link to="/login" className="nav-links">
+                    Login
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link to="/register" className="nav-links">
+                    Register
+                  </Link>
+                </li>
+              </Fragment>
+            )}
 
-isAuth ?
-
-<Fragment>
-<li>
-    <Link to="/quiz" onClick={menuToggleHandler}>Quiz</Link>
-  </li>
-   <li>
-    <Link to="/reset" onClick={menuToggleHandler}>Reset password</Link>
-  </li>
-  <li>
-    <Link
-      to="#"
-      onClick={() => {
-        signOut(auth)
-          .then((isAuth : boolean) => {
-            console.log("user signed out");
-          })
-          .catch((error: any) => {
-            console.log("error", error);
-          });
-         
-      } }
-    >
-      Log out
-    </Link>
-  </li>
-
-<li>
-
-
-
-</li>
-</Fragment>
-: null
-}
-</ul>
-
+            {isAuth ? (
+              <Fragment>
+                <li className="nav-item">
+                  <Link to="/reset" className="nav-links">
+                    Reset password
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link
+                    to="#"
+                    onClick={() => {
+                      signOut(auth)
+                        .then(() => {
+                          console.log("user signed out");
+                        })
+                        .catch((error: any) => {
+                          console.log("error", error);
+                        });
+                    }}
+                    className="nav-links"
+                  >
+                    Log out
+                  </Link>
+                </li>
+              </Fragment>
+            ) : null}
+          </ul>
+        </nav>
+      </div>
     </Fragment>
   );
 }

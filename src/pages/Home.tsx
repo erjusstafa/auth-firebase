@@ -1,9 +1,10 @@
 import React, { FC } from "react";
+import Movie from "../components/Movie";
 
-const Home:FC = () => {
+const Home: FC = () => {
   return (
     <div>
-      <h1>Homepage can see everyone!</h1>
+      <Movie />
     </div>
   );
 };

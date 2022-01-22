@@ -1,69 +1,61 @@
 import React, { useEffect, useState } from "react";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
 import Reset from "./pages/auth/Reset";
-import Secret from "./pages/protected/Secret";
 import Home from "./pages/Home";
 import { initializeApp } from "firebase/app";
 import { firebaseConfig } from "./configs/firebaseConfig";
-import { getAuth, signOut, onAuthStateChanged } from "firebase/auth";
+import { getAuth, signOut, onAuthStateChanged, User } from "firebase/auth";
 import { useReduxDispatch, useReduxSelector } from "./redux/hooks";
 import { saveUser } from "./redux/actions/authSlice";
 import ProtectedRoute from "./utils/ProtectedRoute";
+import Quiz from "./pages/protected/Quiz";
 import Header from "./components/Header";
-import Quiz from "./components/Quiz";
+import Movie from "./components/Movie";
+import MovieDetails from "./components/MovieDetails";
+import "./App.scss";
 
 function App() {
   initializeApp(firebaseConfig);
   const auth = getAuth();
   const user = useReduxSelector((state) => state.user.value);
-  const isauthPerson  = useReduxSelector((state) => state.user.isAuth);
+  const isauthPerson = useReduxSelector((state) => state.user.isAuth);
 
-
-  
-
-  const [isAuth , setIsAuth] = useState<boolean>(isauthPerson)
+  const [isAuth, setIsAuth] = useState<boolean>(isauthPerson);
 
   const dispatch = useReduxDispatch();
   useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
+    onAuthStateChanged(auth, (user: User | null) => {
       if (user) {
         dispatch(saveUser(user.refreshToken));
-        setIsAuth(true)
+        setIsAuth(true);
       } else {
         dispatch(saveUser(undefined));
-        setIsAuth(false)
+        setIsAuth(false);
       }
     });
   }, [auth, dispatch]);
 
   console.log("isAuth", isAuth);
 
-
   return (
     <div className="App">
       <Router>
-    
-      <Header  auth={auth}  signOut={signOut}  isAuth={isAuth}/>
-
+        <Header auth={auth} signOut={signOut} isAuth={isAuth} />
         <Switch>
-          <Route exact path="/register">
-            <Register />
-          </Route>
-          
+          <ProtectedRoute exact path="/" component={Home} />
+          <ProtectedRoute exact path="/quiz" component={Quiz} />
+          <ProtectedRoute exact path="/movie/:id" component={MovieDetails} />
           <Route exact path="/login">
             <Login />
           </Route>
-          <Route exact path="/quiz">
-            <Quiz />
+          <Route exact path="/register">
+            <Register />
           </Route>
           <Route exact path="/reset">
             <Reset />
           </Route>
-          <ProtectedRoute exact path="/protected" component={Secret} />
-          <ProtectedRoute exact path="/" component={Home} />
-
         </Switch>
       </Router>
     </div>
