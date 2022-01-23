@@ -20,7 +20,9 @@
 }
 
 .card-bottom {
-  padding: 20px;
+  height: 100px;
+  display: grid;
+  place-content: center;
 }
 .card-info {
   color: $font-primary;

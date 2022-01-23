@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
 import Reset from "./pages/auth/Reset";
-import Home from "./pages/Home";
+import Home from "./pages/protected/Home/Home";
 import { initializeApp } from "firebase/app";
 import { firebaseConfig } from "./configs/firebaseConfig";
 import { getAuth, signOut, onAuthStateChanged, User } from "firebase/auth";

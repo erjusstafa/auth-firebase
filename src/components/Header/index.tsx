@@ -10,7 +10,7 @@ interface IHeader {
 function Header({ signOut, auth, isAuth }: IHeader) {
   const [click, setClick] = useState<boolean>(false);
   const [navbar, setNavbar] = useState<boolean>(false);
-
+  const history = useHistory();
   const handleClick = () => {
     setClick(!click);
   };
@@ -84,6 +84,7 @@ function Header({ signOut, auth, isAuth }: IHeader) {
                   <Link
                     to="#"
                     onClick={() => {
+                      history.push("/login");
                       signOut(auth)
                         .then(() => {
                           console.log("user signed out");

@@ -5,11 +5,12 @@ import {
   UserCredential,
 } from "firebase/auth";
 import "./style.scss";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 function Register(): ReactElement {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const history = useHistory();
   const auth = getAuth();
 
   const handleRegister = () => {
@@ -20,6 +21,7 @@ function Register(): ReactElement {
         console.log("Registered user: ", user);
         setEmail("");
         setPassword("");
+        history.push("/");
       })
       .catch((error: any) => {
         const errorCode = error.code;
@@ -41,6 +43,7 @@ function Register(): ReactElement {
                 onChange={(e: ChangeEvent<HTMLInputElement>) =>
                   setEmail(e.target.value)
                 }
+                placeholder="email"
               />{" "}
             </div>
             <div className="input-field">
@@ -51,6 +54,7 @@ function Register(): ReactElement {
                 onChange={(e: ChangeEvent<HTMLInputElement>) =>
                   setPassword(e.target.value)
                 }
+                placeholder="password"
               />{" "}
             </div>
 
@@ -118,24 +122,15 @@ function Register(): ReactElement {
               ex ratione. Aliquid!
             </p>
 
-            <button className="btn transparent" id="sign-up-btn">
-              Register
+            <button
+              onClick={() => history.push("/login")}
+              className="btn transparent"
+              id="sign-up-btn"
+            >
+              Sig In
             </button>
           </div>
           <img src="img/log.svg" className="image" alt="" />
-        </div>
-        <div className="panel right-panel">
-          <div className="content">
-            <h3>One of us ?</h3>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum
-              laboriosam ad deleniti.
-            </p>
-            <button className="btn transparent" id="sign-in-btn">
-              Sign in
-            </button>
-          </div>
-          <img src="img/register.svg" className="image" alt="" />
         </div>
       </div>
     </div>

@@ -4,11 +4,12 @@ import {
   UserCredential,
 } from "firebase/auth";
 import React, { ChangeEvent, Fragment, ReactElement, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import "./style.scss";
 function Login(): ReactElement {
   const [email, setEmail] = useState<string>("erjus.stafa@gmail.com");
   const [password, setPassword] = useState<string>("123456");
+  const history = useHistory();
   const auth = getAuth();
 
   const handleLogin = () => {
@@ -16,6 +17,7 @@ function Login(): ReactElement {
       .then((userCredential: UserCredential) => {
         const user = userCredential.user;
         console.log("Singed in user: ", user);
+        history.push("/");
       })
       .catch((error: any) => {
         const errorCode = error.code;
@@ -44,6 +46,7 @@ function Login(): ReactElement {
                   onChange={(e: ChangeEvent<HTMLInputElement>) =>
                     setEmail(e.target.value)
                   }
+                  placeholder="email"
                 />{" "}
               </div>
               <div className="input-field">
@@ -54,9 +57,10 @@ function Login(): ReactElement {
                   onChange={(e: ChangeEvent<HTMLInputElement>) =>
                     setPassword(e.target.value)
                   }
+                  placeholder="password"
                 />{" "}
               </div>
-              <Link to="/quiz" id="butt" onClick={handleLogin}>
+              <Link to="/" id="butt" onClick={handleLogin}>
                 Log In
               </Link>
               <p className="social-text">Or Sign in with social platforms</p>
@@ -118,24 +122,15 @@ function Login(): ReactElement {
                 Debitis, ex ratione. Aliquid!
               </p>
 
-              <button className="btn transparent" id="sign-up-btn">
+              <button
+                onClick={() => history.push("/register")}
+                className="btn transparent"
+                id="sign-up-btn"
+              >
                 Sign up
               </button>
             </div>
             <img src="img/log.svg" className="image" alt="" />
-          </div>
-          <div className="panel right-panel">
-            <div className="content">
-              <h3>One of us ?</h3>
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum
-                laboriosam ad deleniti.
-              </p>
-              <button className="btn transparent" id="sign-in-btn">
-                Sign in
-              </button>
-            </div>
-            <img src="img/register.svg" className="image" alt="" />
           </div>
         </div>
       </div>

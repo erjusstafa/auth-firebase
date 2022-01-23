@@ -1,5 +1,6 @@
 import { getAuth, sendPasswordResetEmail } from "firebase/auth";
 import React, { ChangeEvent, ReactElement, useState } from "react";
+import { Link } from "react-router-dom";
 
 function Reset(): ReactElement {
   const [email, setEmail] = useState<string>("");
@@ -30,9 +31,12 @@ function Reset(): ReactElement {
                 onChange={(e: ChangeEvent<HTMLInputElement>) =>
                   setEmail(e.target.value)
                 }
+                placeholder="Reset your password"
               />
             </div>
-            <button id="butt">Reset</button>
+            <Link to="/login" id="butt">
+              Reset
+            </Link>
           </form>
         </div>
       </div>

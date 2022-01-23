@@ -211,19 +211,16 @@ form.sign-in-form {
   font-size: 1.5rem;
 }
 
-.panel p {
-  font-size: 0.95rem;
-  padding: 0.7rem 0;
-}
-
 .btn.transparent {
-  margin: 0;
+  display: block;
+  margin: 20px auto;
   background: none;
   border: 2px solid #fff;
   width: 130px;
   height: 41px;
   font-weight: 600;
   font-size: 0.8rem;
+  text-align: center;
 }
 
 .right-panel .image,
@@ -320,19 +317,9 @@ form.sign-in-form {
     transition-delay: 0.8s;
   }
 
-  .panel h3 {
-    font-size: 1.2rem;
-  }
-
   .panel p {
     font-size: 0.7rem;
     padding: 0.5rem 0;
-  }
-
-  .btn.transparent {
-    width: 110px;
-    height: 35px;
-    font-size: 0.7rem;
   }
 
   .container:before {

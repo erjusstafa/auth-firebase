@@ -41,7 +41,9 @@
       }
 
       .card-bottom {
-        padding: 20px;
+        height: 70px;
+        display: grid;
+        place-content: center;
       }
       .card-info {
         color: $font-primary;
