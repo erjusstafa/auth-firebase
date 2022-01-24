@@ -1,6 +1,5 @@
 @import "../../common/colors.scss";
 
-
 .navbar {
   height: $header;
   width: 100%;
@@ -36,8 +35,8 @@
 
 .nav-menu {
   display: grid;
-  grid-template-columns: repeat(6, auto); //ndan 8 kolona ne auto
-  grid-gap: 10px;
+  grid-template-columns: repeat(4, auto);
+  grid-gap: 30px;
   text-align: center;
   list-style: none;
   width: 60vw;

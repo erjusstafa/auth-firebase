@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import AliceCarousel from "react-alice-carousel";
 import "react-alice-carousel/lib/alice-carousel.css";
 import { Link } from "react-router-dom";
+import { IMovie, IProd } from "../../redux/actions/movie";
 import { useReduxSelector } from "../../redux/hooks";
 import MovieCard from "../MovieCard";
 import Search from "../Search";
@@ -13,8 +14,8 @@ const responsive = {
   1024: { items: 4 },
 };
 function MovieListing() {
-  const getData = useReduxSelector((state) => state.movie.movies);
-  const items = getData.map((movie: any, index: number) => (
+  const getData = useReduxSelector((state) => state.movie?.movies);
+  const items = getData.map((movie: IMovie, index: number) => (
     <div className="card-item" key={index}>
       <Link to={`/movie/${movie.id}`} style={{ textDecoration: "none" }}>
         <div className="card-inner">
@@ -84,7 +85,7 @@ function MovieListing() {
             .filter((item: any) => {
               return item.name.toLowerCase().includes(search.toLowerCase());
             })
-            .map((movie: any, index: number) => (
+            .map((movie: IMovie, index: number) => (
               <MovieCard key={index} data={movie} />
             ))}
         </div>
