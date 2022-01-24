@@ -85,8 +85,9 @@ function Quiz(): ReactElement {
               </div>
             </div>
             <div className="answer-section">
-              {questions[currentQuestion].answerOptions.map((answerOption) => (
-                <button
+              {questions[currentQuestion].answerOptions.map((answerOption:any , index : number) => (
+               <div key={index}>
+                  <button
                   className="score-section"
                   onClick={() =>
                     handleAnswerOptionClick(answerOption.isCorrect)
@@ -94,6 +95,7 @@ function Quiz(): ReactElement {
                 >
                   {answerOption.answerText}
                 </button>
+               </div>
               ))}
             </div>
           </>

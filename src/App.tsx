@@ -12,7 +12,6 @@ import { saveUser } from "./redux/actions/authSlice";
 import ProtectedRoute from "./utils/ProtectedRoute";
 import Quiz from "./pages/protected/Quiz";
 import Header from "./components/Header";
-import Movie from "./components/Movie";
 import MovieDetails from "./components/MovieDetails";
 import "./App.scss";
 
