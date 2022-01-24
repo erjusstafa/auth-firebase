@@ -34,9 +34,14 @@ function MovieListing() {
   ));
 
   const [search, setSearch] = useState<string>("");
+  const [moreLoad, setMoreLoad] = useState<number>(28);
 
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(event.target.value);
+  };
+
+  const handleMoreLoad = () => {
+    setMoreLoad(moreLoad + 28);
   };
 
   return (
@@ -50,7 +55,7 @@ function MovieListing() {
                 color: "#def",
                 fontSize: "25px",
                 textAlign: "start",
-                fontWeight : "800"
+                fontWeight: "800",
               }}
             >
               Movies
@@ -85,9 +90,18 @@ function MovieListing() {
             .filter((item: any) => {
               return item.name.toLowerCase().includes(search.toLowerCase());
             })
+            .slice(0, moreLoad)
             .map((movie: IMovie, index: number) => (
               <MovieCard key={index} data={movie} />
             ))}
+        </div>
+
+        <div className="load-more">
+          {moreLoad < getData.length ? (
+            <button onClick={handleMoreLoad}> more</button>
+          ) : (
+            <button onClick={() => setMoreLoad(28)}>less</button>
+          )}
         </div>
       </div>
     </div>

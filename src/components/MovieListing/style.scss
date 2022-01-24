@@ -2,6 +2,20 @@
 
 .show-list {
   padding: 10px 20px;
+
+  .load-more {
+    width: 100%;
+    > button {
+      width: 200px;
+      height: 50px;
+      display: block;
+      border: none;
+      margin: 20px auto;
+      &:hover {
+        background-color: #1a242f;
+      }
+    }
+  }
 }
 
 .movie-list,
