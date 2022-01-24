@@ -14,11 +14,11 @@ interface IAnswer {
 function Quiz(): ReactElement {
   const questions = [
     {
-      questionText: "What is the capital of France?",
+      questionText: "What is the capital of Albania?",
       answerOptions: [
-        { answerText: "New York", isCorrect: false },
-        { answerText: "London", isCorrect: false },
-        { answerText: "Paris", isCorrect: true },
+        { answerText: "Durres", isCorrect: false },
+        { answerText: "Pristina", isCorrect: false },
+        { answerText: "Tirana", isCorrect: true },
         { answerText: "Dublin", isCorrect: false },
       ],
     },

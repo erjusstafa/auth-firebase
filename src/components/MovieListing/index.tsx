@@ -49,6 +49,7 @@ function MovieListing() {
                 color: "#def",
                 fontSize: "25px",
                 textAlign: "start",
+                fontWeight : "800"
               }}
             >
               Movies

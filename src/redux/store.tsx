@@ -1,12 +1,13 @@
 import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
 import rootReducer from "./reducerSlice";
-import storage from "redux-persist/lib/storage";
+import storageSession from "redux-persist/lib/storage/session";
+
 import { persistReducer } from "redux-persist";
 
 export const persistConfig = {
   key: "root",
-  storage: storage,
-  blacklist: ["value"],
+  storage: storageSession,
+  whitelist: ["user", "movie"],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer );
