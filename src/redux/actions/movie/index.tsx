@@ -10,14 +10,14 @@ export const fetchAsyncMovies = createAsyncThunk("movie/fetchAsyncMovies", async
 export const fetchAsyncMoviesDetails = createAsyncThunk(
   'movie/fetchAsyncMoviesDetails',
   async (id  : string ) => {
-      return fetch(`https://api.tvmaze.com/shows/${id}`)
-          .then((res : Response) => res.json())
-          .catch((err: string) => console.log(" error ",err));
+      return fetch(`https://api.tvmaze.com/shows/${id}` )
+        .then((res: Response) => res.json())
+        .catch((err: string) => console.log(" error ", err));
         },
 )
 export interface IProd {
   movies: IMovie[];
-  detailMov : any []
+  detailMov : any [];
 }
 
 export interface IMovie {

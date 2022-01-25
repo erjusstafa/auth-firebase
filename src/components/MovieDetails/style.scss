@@ -1,16 +1,29 @@
+@import "../../common/colors.scss";
+
 .movie-section {
   display: flex;
   justify-content: space-evenly;
   padding: 40px 0px;
-  color: red;
+  color: $font-primary;
   font-weight: 400;
+  align-content: center;
+  min-height: 100vh;
+  width: 100%;
+  align-items: center;
+  background-color: #0f171e;
+
+  @media screen and (max-width: 1150px) {
+    display: flex;
+    flex-direction: column-reverse;
+  }
 }
 
 .movie-rating {
   padding-left: 3px;
   margin-top: 20px;
-  color: orange;
+  color: $font-secondary;
   display: flex;
+  justify-content: center;
   span {
     margin-right: 20px;
   }
@@ -18,23 +31,29 @@
 
 .movie-title {
   font-size: 40px;
-  color: rebeccapurple;
+  color: $font-primary;
 }
 .movie-plot {
   margin-top: 20px;
   line-height: 1.8rem;
+  width: 700px;
+  padding: 70px 0;
+  margin: auto;
+  @media screen and (max-width: 700px) {
+    width: calc(100% - 10px);
+  }
 }
 
 .movie-info > div span:first-child {
   padding: 10px 0px;
-  color: red;
+  color: $font-primary;
   font-weight: 600;
   width: 100px;
   display: inline-block;
 }
 
 .movie-info > div span {
-  color: red;
+  color: $font-secondary;
 }
 
 .fa-star {
@@ -54,4 +73,9 @@
 
 .section-right {
   margin-left: 30px;
+
+  > img {
+    width: 400px;
+    height: auto;
+  }
 }

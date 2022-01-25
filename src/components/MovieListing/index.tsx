@@ -16,10 +16,7 @@ const responsive = {
 function MovieListing() {
   const getData = useReduxSelector((state) => state.movie.movies);
 
-
-  console.log("grtdt", getData);
-  
-  const items = getData.map((movie: IMovie, index: number) => (
+  const items =getData && getData.map((movie: IMovie, index: number) => (
     <div className="card-item" key={index}>
       <Link to={`/movie/${movie.id}`} style={{ textDecoration: "none" }}>
         <div className="card-inner">
@@ -91,7 +88,7 @@ function MovieListing() {
           Shows List
         </h2>
         <div className="movie-container">
-          {getData
+          {getData && getData
             .filter((item: any) => {
               return item.name.toLowerCase().includes(search.toLowerCase());
             })

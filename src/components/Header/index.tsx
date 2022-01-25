@@ -39,11 +39,7 @@ function Header({ signOut, auth, isAuth }: IHeader) {
             <p>𝕰𝖗𝖏𝖚𝖘 𝖘𝖙𝖆𝖋𝖆</p>
           </Link>
           <div className="menu-icon" onClick={handleClick}>
-            {click ? (
-              <i className="fas fa-times close_x"></i>
-            ) : (
-              <i className="fas fa-bars align_right" />
-            )}
+            {click ? <i className="fas fa-times close_x"></i> : <i className="fas fa-bars align_right" />}
           </div>
           <ul className={click ? "nav-menu active" : "nav-menu"}>
             <li className="nav-item">
