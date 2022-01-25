@@ -17,7 +17,7 @@ export const fetchAsyncMoviesDetails = createAsyncThunk(
 )
 export interface IProd {
   movies: IMovie[];
-  detailMov : any [];
+  detailMov : IMovie [];
 }
 
 export interface IMovie {
