@@ -1,11 +1,10 @@
 import { combineReducers } from "@reduxjs/toolkit";
 import userSliceReducer from "../redux/actions/authSlice";
-
-import movieSlice from "../redux/actions/movie/index";
+import movieSliceReducer from "../redux/actions/movie/index";
 
 const rootReducer = combineReducers({
   user: userSliceReducer,
-  movie: movieSlice,
+  movie: movieSliceReducer,
 });
 
 export default rootReducer;

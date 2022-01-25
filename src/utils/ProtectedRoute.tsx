@@ -1,10 +1,10 @@
-import React from "react";
+import React, { ReactElement } from "react";
 import { Redirect, Route } from "react-router";
 import { useReduxSelector } from "../redux/hooks";
 
-const ProtectedRoute = ({ component: Component }: any) => {
+function  ProtectedRoute ({ component: Component }: any) :ReactElement {
   const user = useReduxSelector((state) => state.user.value);
-  console.log("user", user);
+  console.log("token", user);
   return (
     <Route
       render={(props) => {

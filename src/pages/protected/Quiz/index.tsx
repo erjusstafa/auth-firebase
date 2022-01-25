@@ -73,6 +73,12 @@ function Quiz(): ReactElement {
         {showScore ? (
           <div className="score-section">
             You scored {score} out of {questions.length}
+
+            {
+              score === 4 && 
+              
+              <img src="https://media0.giphy.com/media/5hgYDDh5oqbmE4OKJ3/giphy.gif?cid=ecf05e47cksy6c1xqaycd9vyrltgl20ca2ea14euewu1gm3g&amp;rid=giphy.gif&amp;ct=g" alt="Good Job GIF by MOODMAN" className="gif"  style={{width: "100%", height: "100%", position: "absolute", opacity: 0.5}} />
+            }
           </div>
         ) : (
           <>

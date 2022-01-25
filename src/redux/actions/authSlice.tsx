@@ -14,7 +14,7 @@ export const authSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
-    saveUser: (state, action: PayloadAction<any>) => {
+    saveUser: (state, action: PayloadAction<IValue | any>) => {
       state.value = action.payload;
       state.isAuth = true;
     },

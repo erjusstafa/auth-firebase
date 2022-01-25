@@ -1,36 +1,56 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
-import { IMovie } from "../../redux/actions/movie";
+import {  fetchAsyncMoviesDetails, IMovie } from "../../redux/actions/movie";
 import { useReduxDispatch, useReduxSelector } from "../../redux/hooks";
 import Loading from "../Loading";
 import "./style.scss";
 
-interface IUserPublicProfileRouteParams {
+export interface IParams {
   id: string;
 }
+
+
 function MovieDetails() {
   const dispatch = useReduxDispatch();
-  const { id } = useParams<IUserPublicProfileRouteParams>();
+  const { id } = useParams<IParams>();
   const [charData, setCharData] = useState<IMovie[]>([]);
   const [load, setLoad] = useState(false);
 
-  const fetchCharData = async () => {
-    return await  fetch(`https://api.tvmaze.com/shows/${id}`)
-    .then((res) => res.json())
-    .then((data) => setCharData(data))
-    .catch((er) => console.log("err is" , er)
-    )
+  const merr = useReduxSelector((state) => state.movie.detailMov)
+
+  
+
+/*   const fetchCharData = async () => {
+    return await fetch(`https://api.tvmaze.com/shows/${id}`)
+      .then((res) => res.json())
+      .then((data) => setCharData(data))
+      .catch((error) => console.log("error", error));
   };
+ */
+
+/*   useEffect(() => {
+    setLoad(true);
+    setTimeout(() => {
+    fetchCharData(id)
+      setLoad(false);
+    }, 2000);
+  }, []);
+ */
+
 
   useEffect(() => {
     setLoad(true);
     setTimeout(() => {
-      fetchCharData();
+     dispatch(fetchAsyncMoviesDetails(id))
       setLoad(false);
     }, 2000);
-  }, []);
+  }, []); 
 
+
+  
   console.log("detail", charData);
+  console.log("mer", merr);
+
   return (
     <Fragment>
       {load ? (

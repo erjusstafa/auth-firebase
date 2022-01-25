@@ -1,13 +1,23 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 
 export const fetchAsyncMovies = createAsyncThunk("movie/fetchAsyncMovies", async () => {
-  return fetch(`https://api.tvmaze.com/shows`)
+  return fetch(`https://api.tvmaze.com/show`)
     .then((res: Response) => res.json())
-    .catch((err: string) => console.log(" error bro"));
+    .catch((err: string) => console.log(" error ",err));
 });
 
+
+export const fetchAsyncMoviesDetails = createAsyncThunk(
+  'movie/fetchAsyncMoviesDetails',
+  async (id  : string ) => {
+      return fetch(`https://api.tvmaze.com/shows/${id}`)
+          .then((res : Response) => res.json())
+          .catch((err: string) => console.log(" error ",err));
+        },
+)
 export interface IProd {
   movies: IMovie[];
+  detailMov : any []
 }
 
 export interface IMovie {
@@ -78,6 +88,7 @@ interface ILinks {
 }
 const initialState: IProd = {
   movies: [],
+  detailMov : []
 };
 
 const movieSlice = createSlice({
@@ -93,6 +104,19 @@ const movieSlice = createSlice({
       state.movies = payload;
     },
     [fetchAsyncMovies.rejected.toString()]: () => {
+      console.log("Rejected!");
+    },
+
+
+
+    [fetchAsyncMoviesDetails.pending.toString()]: () => {
+      console.log("Pending");
+    },
+    [fetchAsyncMoviesDetails.fulfilled.toString()]: (state, { payload }: PayloadAction<IMovie[]>) => {
+      console.log("Fetched Successfully!");
+      state.detailMov = payload;
+    },
+    [fetchAsyncMoviesDetails.rejected.toString()]: () => {
       console.log("Rejected!");
     },
   },

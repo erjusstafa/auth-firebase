@@ -14,7 +14,11 @@ const responsive = {
   1024: { items: 4 },
 };
 function MovieListing() {
-  const getData = useReduxSelector((state) => state.movie?.movies);
+  const getData = useReduxSelector((state) => state.movie.movies);
+
+
+  console.log("grtdt", getData);
+  
   const items = getData.map((movie: IMovie, index: number) => (
     <div className="card-item" key={index}>
       <Link to={`/movie/${movie.id}`} style={{ textDecoration: "none" }}>
@@ -67,6 +71,7 @@ function MovieListing() {
               autoPlayInterval={1500}
               items={items}
               disableDotsControls={true}
+              autoPlay={true}
             />
           </div>
         </div>
@@ -90,19 +95,21 @@ function MovieListing() {
             .filter((item: any) => {
               return item.name.toLowerCase().includes(search.toLowerCase());
             })
-            .slice(0, moreLoad)
+            .splice(0, moreLoad)
             .map((movie: IMovie, index: number) => (
               <MovieCard key={index} data={movie} />
             ))}
         </div>
 
-        <div className="load-more">
-          {moreLoad < getData.length ? (
-            <button onClick={handleMoreLoad}> more</button>
-          ) : (
-            <button onClick={() => setMoreLoad(28)}>less</button>
-          )}
-        </div>
+        {
+          <div className="load-more">
+            {moreLoad < getData.length ? (
+              <button onClick={handleMoreLoad}> more</button>
+            ) : (
+              <button onClick={() => setMoreLoad(28)}>less</button>
+            )}
+          </div>
+        }
       </div>
     </div>
   );
