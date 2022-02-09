@@ -36,11 +36,7 @@ function Table(): ReactElement {
   };
   const sortData = (col: any) => {
 
-    if (sortedField === "ASC") {
-        const sorted = [...data].sort((a, b) => (a[col] - b[col] ? 1 : -1));
-        setData(sorted);
-        setSortedField("DSC");
-      }
+ 
 
     if (sortedField === "ASC") {
       const sorted = [...data].sort((a, b) => (a[col].toLowerCase() > b[col].toLowerCase() ? 1 : -1));
@@ -64,7 +60,7 @@ function Table(): ReactElement {
            <table className="last-winnings-table">
           <thead className="last-winnings-thead">
             <tr>
-              <th  onClick={() => sortData("id")}>Id</th>
+              <th>Id</th>
               <th onClick={() => sortData("name")}>Name</th>
               <th onClick={() => sortData("username")}> Username</th>
             </tr>
