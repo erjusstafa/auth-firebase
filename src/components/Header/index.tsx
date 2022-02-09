@@ -53,7 +53,12 @@ function Header({ signOut, auth, isAuth }: IHeader) {
                 Quiz
               </Link>
             </li>
-
+            <li className="nav-item">
+              <Link to="/table" className="nav-links">
+                Table
+              </Link>
+            </li>
+         
             {isAuth === true ? null : (
               <Fragment>
                 <li className="nav-item">

@@ -14,6 +14,7 @@ import Quiz from "./pages/protected/Quiz";
 import Header from "./components/Header";
 import MovieDetails from "./components/MovieDetails";
 import "./App.scss";
+import Table from "./components/Table";
 
 function App() {
   initializeApp(firebaseConfig);
@@ -46,6 +47,8 @@ function App() {
           <ProtectedRoute exact path="/" component={Home} />
           <ProtectedRoute exact path="/quiz" component={Quiz} />
           <ProtectedRoute exact path="/movie/:id" component={MovieDetails} />
+          <ProtectedRoute exact path="/table" component={Table} />
+
           <Route exact path="/login">
             <Login />
           </Route>
